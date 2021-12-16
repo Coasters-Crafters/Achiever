@@ -1,17 +1,17 @@
 package nl.iobyte.achiever;
 
-import nl.iobyte.achiever.generic.IAssInvoker;
+import nl.iobyte.achiever.generic.IAchieverInvoker;
 import nl.iobyte.achiever.generic.logging.ILogging;
 import nl.iobyte.achiever.generic.registry.ImplementationRegistry;
 import nl.iobyte.achiever.generic.scheduler.IScheduler;
 import nl.iobyte.achiever.generic.service.IService;
 
-public class Ass extends ImplementationRegistry<IService> implements IAssInvoker {
+public class Achiever extends ImplementationRegistry<IService> implements IAchieverInvoker {
 
-    private static Ass instance;
-    private final IAssInvoker invoker;
+    private static Achiever instance;
+    private final IAchieverInvoker invoker;
 
-    public Ass(IAssInvoker invoker) {
+    public Achiever(IAchieverInvoker invoker) {
         instance = this;
         this.invoker = invoker;
 
@@ -50,9 +50,9 @@ public class Ass extends ImplementationRegistry<IService> implements IAssInvoker
 
     /**
      * Get plugin instance
-     * @return Ass
+     * @return Achiever
      */
-    public static Ass getInstance() {
+    public static Achiever getInstance() {
         return instance;
     }
 

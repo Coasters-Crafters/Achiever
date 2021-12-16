@@ -3,7 +3,7 @@ package nl.iobyte.achiever.generic;
 import nl.iobyte.achiever.generic.logging.ILogging;
 import nl.iobyte.achiever.generic.scheduler.IScheduler;
 
-public interface IAssInvoker {
+public interface IAchieverInvoker {
 
     /**
      * Get logging implementation
