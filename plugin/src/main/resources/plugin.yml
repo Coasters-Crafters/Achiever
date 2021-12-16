@@ -1,0 +1,7 @@
+name: Achiever
+version: 1.0.0
+
+author: IOByte
+website: 'https://www.iobyte.nl'
+
+main: nl.iobyte.achiever.spigot.SpigotAchieverInvoker
