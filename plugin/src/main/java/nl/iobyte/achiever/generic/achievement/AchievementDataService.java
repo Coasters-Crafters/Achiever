@@ -26,17 +26,20 @@ public class AchievementDataService extends DataService<UUID, AchievementUserDat
         assert type_id != null;
         assert value != null;
         Achiever.getInstance().getScheduler().async(() -> {
+            //Get type
             IAchievementType<?> type = Achiever.service(AchievementTypeService.class).get(type_id);
             if(type == null) {
                 Achiever.getInstance().getLogging().error("Unable to find achievement type: "+type_id);
                 return;
             }
 
+            //Check if passed value can be used with type
             if(!type.getType().isInstance(value) && !type.getType().isAssignableFrom(value.getClass())) {
                 Achiever.getInstance().getLogging().error("Value of type: "+value.getClass().getSimpleName()+" doesn't match with achievement type of: "+type.getType().getSimpleName());
                 return;
             }
 
+            //Get check for type
             IAchievementCheck<?> check = type.getCheck();
             if(check == null) {
                 Achiever.getInstance().getLogging().error("Unable to find achievement check for type: "+type.getType().getSimpleName());
