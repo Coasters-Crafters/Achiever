@@ -7,10 +7,13 @@ import nl.iobyte.achiever.generic.achievement.interfaces.IAchievementDataService
 import nl.iobyte.achiever.generic.achievement.interfaces.IAchievementType;
 import nl.iobyte.achiever.generic.events.AchieveEvent;
 import nl.iobyte.achiever.generic.events.IEventService;
+import nl.iobyte.dataapi.data.DataService;
 import java.util.Collection;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
-public class AchievementDataService implements IAchievementDataService {
+public class AchievementDataService extends DataService<UUID, AchievementUserData> implements IAchievementDataService {
 
     /**
      * {@inheritDoc}
@@ -40,8 +43,18 @@ public class AchievementDataService implements IAchievementDataService {
                 return;
             }
 
+            //Get achievements for type
             Collection<? extends IAchievement<?>> achievements = type.getAchievements();
-            //TODO filter achievements that don't need to be checked
+
+            //Filter achievements
+            AchievementUserData data = get(uuid);
+            if(data != null)
+                achievements = achievements.stream()
+                        .filter(a -> !data.hasAchieved(a.getID()))
+                        .collect(Collectors.toList());
+
+            if(achievements.isEmpty())
+                return;
 
             //Check achievements
             achievements.forEach(a -> {
@@ -53,6 +66,18 @@ public class AchievementDataService implements IAchievementDataService {
 
                 if(!b)
                     return;
+
+                //Set achieved
+                if(data != null) {
+                    data.achieve(a.getID());
+                } else {
+                    add(new AchievementUserData(
+                            uuid,
+                            new ConcurrentHashMap<>(){{
+                                put(a.getID(), true);
+                            }}
+                    ));
+                }
 
                 //Fire event
                 Achiever.service(
