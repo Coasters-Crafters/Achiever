@@ -1,5 +1,8 @@
 package nl.iobyte.achiever.generic.achievement.objects;
 
+import nl.iobyte.achiever.Achiever;
+import nl.iobyte.achiever.generic.achievement.AchievementCheckService;
+import nl.iobyte.achiever.generic.achievement.AchievementService;
 import nl.iobyte.achiever.generic.achievement.interfaces.IAchievement;
 import nl.iobyte.achiever.generic.achievement.interfaces.IAchievementCheck;
 import nl.iobyte.achiever.generic.achievement.interfaces.IAchievementType;
@@ -30,7 +33,7 @@ public abstract class AbstractAchievementType<T> extends Data<String> implements
      * @return IAchievementCheck<T>
      */
     public IAchievementCheck<T> getCheck() {
-        return null;//TODO Service
+        return Achiever.service(AchievementCheckService.class).getAs(type);
     }
 
     /**
@@ -63,7 +66,7 @@ public abstract class AbstractAchievementType<T> extends Data<String> implements
      * @return Collection<IAchievement<T>>
      */
     public Collection<IAchievement<T>> getAchievements() {
-        return null;//TODO service
+        return Achiever.service(AchievementService.class).getWithType(this);
     }
 
 }
