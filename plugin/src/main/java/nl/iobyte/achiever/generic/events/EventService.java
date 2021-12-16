@@ -4,7 +4,6 @@ import nl.iobyte.achiever.Achiever;
 import nl.iobyte.dataapi.event.EventDriver;
 import nl.iobyte.dataapi.event.interfaces.IEvent;
 import nl.iobyte.dataapi.event.interfaces.IEventHandler;
-import java.util.concurrent.ForkJoinPool;
 
 public class EventService implements IEventService {
 
