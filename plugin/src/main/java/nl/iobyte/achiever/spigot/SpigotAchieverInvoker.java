@@ -4,12 +4,18 @@ import nl.iobyte.achiever.Achiever;
 import nl.iobyte.achiever.generic.IAchieverInvoker;
 import nl.iobyte.achiever.generic.achievement.AchievementDataService;
 import nl.iobyte.achiever.generic.achievement.interfaces.IAchievementDataService;
+import nl.iobyte.achiever.generic.database.DatabaseService;
+import nl.iobyte.achiever.generic.events.AchieveEvent;
 import nl.iobyte.achiever.generic.events.EventService;
 import nl.iobyte.achiever.generic.events.IEventService;
 import nl.iobyte.achiever.generic.logging.ILogging;
 import nl.iobyte.achiever.generic.scheduler.IScheduler;
+import nl.iobyte.achiever.spigot.listeners.AchievementListener;
+import nl.iobyte.achiever.spigot.listeners.PlayerListener;
 import nl.iobyte.achiever.spigot.logging.SpigotLogging;
 import nl.iobyte.achiever.spigot.scheduler.SpigotScheduler;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SpigotAchieverInvoker extends JavaPlugin implements IAchieverInvoker {
@@ -32,6 +38,17 @@ public class SpigotAchieverInvoker extends JavaPlugin implements IAchieverInvoke
         achiever.register(
                 IAchievementDataService.class,
                 AchievementDataService.class
+        );
+        achiever.register(DatabaseService.class);
+
+        //Register bukkit events
+        PluginManager pm = Bukkit.getPluginManager();
+        pm.registerEvents(new PlayerListener(), this);
+
+        //Register plugin events
+        achiever.get(IEventService.class).on(
+                AchieveEvent.class,
+                new AchievementListener()
         );
 
         //Start plugin
