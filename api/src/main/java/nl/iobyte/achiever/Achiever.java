@@ -1,6 +1,9 @@
 package nl.iobyte.achiever;
 
 import nl.iobyte.achiever.generic.IAchieverInvoker;
+import nl.iobyte.achiever.generic.achievement.AchievementCheckService;
+import nl.iobyte.achiever.generic.achievement.AchievementService;
+import nl.iobyte.achiever.generic.achievement.AchievementTypeService;
 import nl.iobyte.achiever.generic.logging.ILogging;
 import nl.iobyte.achiever.generic.registry.ImplementationRegistry;
 import nl.iobyte.achiever.generic.scheduler.IScheduler;
@@ -16,6 +19,9 @@ public class Achiever extends ImplementationRegistry<IService> implements IAchie
         this.invoker = invoker;
 
         //Register
+        register(AchievementCheckService.class);
+        register(AchievementTypeService.class);
+        register(AchievementService.class);
     }
 
     /**
