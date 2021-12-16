@@ -1,10 +1,11 @@
 package nl.iobyte.achiever.generic.achievement;
 
 import nl.iobyte.achiever.generic.achievement.interfaces.IAchievementCheck;
+import nl.iobyte.achiever.generic.service.IService;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class AchievementCheckService extends ConcurrentHashMap<Class<?>, IAchievementCheck<?>> {
+public class AchievementCheckService extends ConcurrentHashMap<Class<?>, IAchievementCheck<?>> implements IService {
 
     /**
      * Perform check for type
