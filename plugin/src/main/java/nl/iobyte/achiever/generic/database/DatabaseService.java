@@ -3,13 +3,12 @@ package nl.iobyte.achiever.generic.database;
 import nl.iobyte.achiever.Achiever;
 import nl.iobyte.achiever.generic.database.objects.AbstractDatabase;
 import nl.iobyte.achiever.generic.database.objects.types.NullDatabase;
-import nl.iobyte.achiever.generic.service.IService;
 import nl.iobyte.dataapi.data.DataService;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 
-public class DatabaseService extends DataService<String, AbstractDatabase> implements IService {
+public class DatabaseService extends DataService<String, AbstractDatabase> implements IDatabaseService {
 
     private final AbstractDatabase empty = new NullDatabase();
 
