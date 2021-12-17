@@ -1,10 +1,11 @@
 package nl.iobyte.achiever.spigot.listeners;
 
 import nl.iobyte.achiever.Achiever;
+import nl.iobyte.achiever.addons.vault.data.UserVaultData;
 import nl.iobyte.achiever.generic.achievement.AchievementDataService;
 import nl.iobyte.achiever.generic.achievement.AchievementUserData;
 import nl.iobyte.achiever.generic.achievement.interfaces.IAchievementDataService;
-import nl.iobyte.achiever.generic.database.DatabaseService;
+import nl.iobyte.achiever.generic.database.IDatabaseService;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -18,7 +19,7 @@ public class PlayerListener implements Listener {
     //Load player data
     public void onJoin(PlayerJoinEvent e) {
         Achiever.getInstance().getScheduler().async(() -> {
-            Collection<Map<String,Object>> rows = Achiever.service(DatabaseService.class).executeQuery(
+            Collection<Map<String,Object>> rows = Achiever.service(IDatabaseService.class).executeQuery(
                     "local",
                     "SELECT id FROM achieved WHERE uuid=?",//TODO Create table and save data into table
                     new HashMap<>(){{
@@ -47,8 +48,11 @@ public class PlayerListener implements Listener {
 
     //Remove player data
     public void onLeave(PlayerQuitEvent e) {
-        AchievementDataService service = (AchievementDataService) Achiever.service(IAchievementDataService.class);
-        service.remove(e.getPlayer().getUniqueId());
+        //Achievement data
+        ((AchievementDataService) Achiever.service(IAchievementDataService.class)).remove(e.getPlayer().getUniqueId());
+
+        //Vault addon
+        Achiever.service(UserVaultData.class).remove(e.getPlayer().getUniqueId());
     }
 
 }

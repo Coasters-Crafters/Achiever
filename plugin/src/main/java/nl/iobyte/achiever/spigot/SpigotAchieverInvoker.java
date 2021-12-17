@@ -1,10 +1,12 @@
 package nl.iobyte.achiever.spigot;
 
 import nl.iobyte.achiever.Achiever;
+import nl.iobyte.achiever.addons.vault.VaultAddon;
 import nl.iobyte.achiever.generic.IAchieverInvoker;
 import nl.iobyte.achiever.generic.achievement.AchievementDataService;
 import nl.iobyte.achiever.generic.achievement.interfaces.IAchievementDataService;
 import nl.iobyte.achiever.generic.database.DatabaseService;
+import nl.iobyte.achiever.generic.database.IDatabaseService;
 import nl.iobyte.achiever.generic.events.AchieveEvent;
 import nl.iobyte.achiever.generic.events.EventService;
 import nl.iobyte.achiever.generic.events.IEventService;
@@ -39,7 +41,13 @@ public class SpigotAchieverInvoker extends JavaPlugin implements IAchieverInvoke
                 IAchievementDataService.class,
                 AchievementDataService.class
         );
-        achiever.register(DatabaseService.class);
+        achiever.register(
+                IDatabaseService.class,
+                DatabaseService.class
+        );
+
+        //Initialize addons
+        new VaultAddon(this);
 
         //Register bukkit events
         PluginManager pm = Bukkit.getPluginManager();
