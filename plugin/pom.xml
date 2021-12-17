@@ -12,14 +12,19 @@
     <artifactId>plugin</artifactId>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>nl.iobyte</groupId>
             <artifactId>api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>nl.iobyte</groupId>
+            <artifactId>vault-addon</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
