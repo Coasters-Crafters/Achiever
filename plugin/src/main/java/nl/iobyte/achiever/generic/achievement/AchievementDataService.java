@@ -18,6 +18,20 @@ public class AchievementDataService extends DataService<UUID, AchievementUserDat
     /**
      * {@inheritDoc}
      * @param uuid UUID
+     * @param id String
+     * @return Boolean
+     */
+    public boolean hasAchieved(UUID uuid, String id) {
+        return getOptional(
+                uuid
+        ).map(
+                entry -> entry.hasAchieved(id)
+        ).orElse(false);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @param uuid UUID
      * @param type_id String
      * @param value Object
      */
