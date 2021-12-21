@@ -8,6 +8,7 @@ import nl.iobyte.achiever.generic.logging.ILogging;
 import nl.iobyte.achiever.generic.registry.ImplementationRegistry;
 import nl.iobyte.achiever.generic.scheduler.IScheduler;
 import nl.iobyte.achiever.generic.service.IService;
+import java.io.File;
 
 public class Achiever extends ImplementationRegistry<IService> implements IAchieverInvoker {
 
@@ -76,6 +77,14 @@ public class Achiever extends ImplementationRegistry<IService> implements IAchie
      */
     public IScheduler getScheduler() {
         return invoker.getScheduler();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return File
+     */
+    public File getDataFolder() {
+        return invoker.getDataFolder();
     }
 
 }

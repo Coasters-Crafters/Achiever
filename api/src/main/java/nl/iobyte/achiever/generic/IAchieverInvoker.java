@@ -2,6 +2,7 @@ package nl.iobyte.achiever.generic;
 
 import nl.iobyte.achiever.generic.logging.ILogging;
 import nl.iobyte.achiever.generic.scheduler.IScheduler;
+import java.io.File;
 
 public interface IAchieverInvoker {
 
@@ -16,5 +17,11 @@ public interface IAchieverInvoker {
      * @return IScheduler
      */
     IScheduler getScheduler();
+
+    /**
+     * Get data folder of invoker
+     * @return File
+     */
+    File getDataFolder();
 
 }
